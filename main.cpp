@@ -2,6 +2,13 @@
 using namespace std;
 // cryptlib library for saving pin numbers and encrypting
 
+/*
+Enter Name, Account number, Account type to be shown during transactions.
+Shows the information about the person who is doing the transaction.
+Enter amount to deposited in the account.
+Shows the Balance in the account.
+Enter amount to be withdrawn from the account, and then it shows available balance.
+Cancel the transaction.*/
 // class start
 class Application
 {
@@ -27,7 +34,7 @@ public:
             cout << "Welcome to your account" << endl;
         }
     }
-    void showMenu()
+    void showMenu() // shows menu for atm application
     {
         cout << "********** Menu **********" << endl;
         cout << "Please select what you need from the options below" << endl;
@@ -41,7 +48,6 @@ public:
     }
     void withdraw()
     {
-
         cout << "Enter amount you want to withdraw. " << endl;
         cin >> withdrawAmount;
         if (withdrawAmount > balance)
@@ -62,13 +68,11 @@ public:
         cin >> depositAmount;
     }
     // include done with transaction feature
-    void transaction()
+    void transactionDone()
     {
-        cout << "Are you done with your transaction? Please type Y or N" << endl;
-        cin >> doneWithTransaction;
         if (doneWithTransaction == 'N')
         {
-            showMenu();
+            Application();
         }
         else
         {
@@ -86,24 +90,47 @@ int main()
 
     user1.pinNumber();
     user1.showMenu();
-    cout << "Enter option here: " << endl;
+    cout << "Select what option you want to do: " << endl;
     cin >> options;
     switch (options)
     {
     case 1:
         user1.checkBalance();
+        cout << "Done with transaction? " << endl;
+        cin >> user1.doneWithTransaction;
+        while (user1.doneWithTransaction == 'N')
+        {
+            user1.transactionDone();
+        }
 
+        cout << "thanks for using our atm" << endl;
         break;
 
     case 2:
         user1.withdraw();
+        cout << "Done with transaction? " << endl;
+        cin >> user1.doneWithTransaction;
+        while (user1.doneWithTransaction == 'N')
+        {
+            user1.transactionDone();
+        }
 
+        cout << "thanks for using our atm" << endl;
         break;
+
     case 3:
         user1.deposit();
+        cout << "Done with transaction? " << endl;
+        cin >> user1.doneWithTransaction;
+        while (user1.doneWithTransaction == 'N')
+        {
+            user1.transactionDone();
+        }
 
+        cout << "thanks for using our atm" << endl;
         break;
     }
+    // Learn how to allow user to continue transaction if not done
 
     return 0;
 }
